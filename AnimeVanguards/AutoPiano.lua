@@ -14,6 +14,9 @@ local ScriptConfig = {
     },
     Settings = {
         Toogle = false7
+    },
+    Webhook = {
+        url = ""
     }
 }
 

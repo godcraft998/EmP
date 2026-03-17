@@ -1,0 +1,6 @@
+{
+    "luau-lsp.plugin.enabled": true,
+    "Lua.diagnostics.globals": [
+        "createWebhook"
+    ]
+}
