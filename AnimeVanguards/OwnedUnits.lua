@@ -19,7 +19,15 @@ end
 
 function modules:FindUnitByRarity(Rarity)
     for _,v in pairs(GetUnits()) do
-        if (v.UnitData.Rarity == 'Rarity') then
+        if (v.UnitData.Rarity == Rarity) then
+            return v
+        end
+    end
+end
+
+function modules:FindUnitByName(Name)
+    for _,v in pairs(GetUnits()) do
+        if (v.UnitData.Name == Name) then
             return v
         end
     end
