@@ -7,7 +7,7 @@ local config = {
 config.__index = config
 
 function loader:CreateConfig()
-    return setmetatable({}, webhook)
+    return setmetatable({}, config)
 end
 
 function config:SetPath(Path)
