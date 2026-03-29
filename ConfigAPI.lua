@@ -15,23 +15,23 @@ function config:SetPath(Path)
 end
 
 function config:LoadConfig()
-    if not isfile(config.Path) then
+    if not isfile(self.Path) then
         return
     else
-        local jsonData = readfile(config.Path)
+        local jsonData = readfile(self.Path)
         return HttpService:JSONDecode(jsonData)
     end
 end
 
 function config:SaveConfig(Config)
-    if not isfolder(config.Path) then
-        makefolder(config.Path)
+    if not isfolder(self.Path) then
+        makefolder(self.Path)
     end
 
-    if not isfile(config.Path) then
-        writefile(config.Path, HttpService:JSONEncode({}))
+    if not isfile(self.Path) then
+        writefile(self.Path, HttpService:JSONEncode({}))
     end
-    writefile(config.Path, HttpService:JSONEncode(Config))
+    writefile(self.Path, HttpService:JSONEncode(Config))
 end
 
 return loader
