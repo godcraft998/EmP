@@ -1,5 +1,7 @@
 local loader = {}
 
+-- Service
+local HttpService = game:GetService("HttpService")
 
 local config = {
     Path = "Config.json"
