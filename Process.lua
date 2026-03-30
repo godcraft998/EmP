@@ -1,0 +1,1 @@
+print(game.Players.LocalPlayer:LocalPlayer:GetAttribute("Gold"))

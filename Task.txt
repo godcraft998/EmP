@@ -1,0 +1,8 @@
+Kiểm tra xem có đang ở trong tutorial không, skip tutorial nếu đang ở trong tutorial
+↓   Kiểm tra Player Level
+    ↓   Nếu thấp hơn 50 sẽ teleport vào Winter Event
+        ↓   dịch chuyển về lobby khi đủ level 50
+    ↓   Nếu cao hơn 50 sẽ chờ host
+        ↓   nếu không có host sẽ đánh Piano
+        ↓   nếu có host sẽ cũng host đi vào raid 4 - 1
+            ↓   đủ raid token sẽ tự động thoát raid 4 - 1

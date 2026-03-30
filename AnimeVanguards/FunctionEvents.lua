@@ -107,4 +107,25 @@ function modules:RequestStock(Shop)
     return response
 end
 
+function modules:WinterLTMEvent()
+    local args = {
+        "Create"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("Networking"):WaitForChild("Winter"):WaitForChild("WinterLTMEvent"):FireServer(unpack(args))
+end
+
+function modules:StartMatch()
+    local args = {
+        "StartMatch"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("Networking"):WaitForChild("LobbyEvent"):FireServer(unpack(args))
+end
+
+function modules:LeaveMatch()
+    local args = {
+        "LeaveMatch"
+    }
+    game:GetService("ReplicatedStorage"):WaitForChild("Networking"):WaitForChild("LobbyEvent"):FireServer(unpack(args))
+end
+
 return modules
