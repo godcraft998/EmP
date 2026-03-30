@@ -23,10 +23,12 @@ function config:LoadConfig()
 end
 
 function config:SaveConfig(Config)
-    if not isfolder(self.Path) then
-        makefolder(self.Path)
-    end
+	local folder, file = string.match(self.Path, "(.+)/([^/]+)$")
 
+    if not isfolder(folder) then
+        makefolder(folder)
+    end
+	
     writefile(self.Path, game:GetService("HttpService"):JSONEncode(Config))
 end
 
