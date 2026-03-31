@@ -17,7 +17,6 @@ local function Callback(args, RemoteEvent, timeout, callback)
     RemoteEvent:FireServer(unpack(args))
 
     local start = tick()
-
     repeat
         task.wait()
     until done or (tick() - start >= timeout)
@@ -28,7 +27,6 @@ local function Callback(args, RemoteEvent, timeout, callback)
 
     return response
 end
-
 function modules:TraitReroll(UniqueID)
     local args = {
         [1] = "Reroll",
@@ -45,7 +43,6 @@ function modules:TraitReroll(UniqueID)
         end
     end)
 end
-
 function modules:StatReroll(UniqueID, RollType)
     RollType = RollType or "All"
     local args = {
@@ -58,7 +55,6 @@ function modules:StatReroll(UniqueID, RollType)
         return UnitData.Statistics
     end)
 end
-
 function modules:GetEventCurrency(Event)
     local args = {
         Event
@@ -69,7 +65,6 @@ function modules:GetEventCurrency(Event)
         return Currency
     end)
 end
-
 function modules:PurchaseItem(Shop, Item, Amount)
     local args = {
         [1] = Shop,
@@ -79,7 +74,6 @@ function modules:PurchaseItem(Shop, Item, Amount)
 
     game:GetService("ReplicatedStorage"):WaitForChild("Networking"):WaitForChild("Shop"):WaitForChild("PurchaseItem"):FireServer(unpack(args))
 end
-
 function modules:RequestStock(Shop)
     local RequestStock = game:GetService("ReplicatedStorage"):WaitForChild("Networking"):WaitForChild("Shop"):WaitForChild("RequestStock");
 
@@ -106,26 +100,63 @@ function modules:RequestStock(Shop)
 
     return response
 end
-
 function modules:WinterLTMEvent()
     local args = {
         "Create"
     }
     game:GetService("ReplicatedStorage"):WaitForChild("Networking"):WaitForChild("Winter"):WaitForChild("WinterLTMEvent"):FireServer(unpack(args))
 end
-
 function modules:StartMatch()
     local args = {
         "StartMatch"
     }
     game:GetService("ReplicatedStorage"):WaitForChild("Networking"):WaitForChild("LobbyEvent"):FireServer(unpack(args))
 end
-
 function modules:LeaveMatch()
     local args = {
         "LeaveMatch"
     }
     game:GetService("ReplicatedStorage"):WaitForChild("Networking"):WaitForChild("LobbyEvent"):FireServer(unpack(args))
+end
+function modules.CreateMatch(data)
+    local args = {
+        "AddMatch",
+        {
+            Difficulty = data.Difficulty,
+            Act = data.Act,
+            StageType = data.StageType,
+            Stage = data.Stage,
+            FriendsOnly = data.FriendsOnly or false
+        }
+    }
+
+    local LobbyEvent = game:GetService("ReplicatedStorage"):WaitForChild("Networking"):WaitForChild("LobbyEvent")
+    local MatchEvent = game:GetService("ReplicatedStorage"):WaitForChild("Networking"):WaitForChild("MatchReplicationEvent")
+
+    local done = false
+    local response
+
+    local conn
+    conn = MatchEvent.OnClientEvent:Connect(function(action, data)
+        if action and action == "AddMatch" and data and data.Host == game:GetService("Players").LocalPlayer then
+            done = true
+            response = data
+            conn:Disconnect()
+        end
+    end)
+
+    LobbyEvent:FireServer(unpack(args))
+
+    local start = tick()
+    repeat
+        task.wait()
+    until done or (tick() - start >= 2.5)
+
+    if conn then
+        conn:Disconnect()
+    end
+
+    return response
 end
 
 return modules
