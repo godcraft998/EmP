@@ -58,6 +58,7 @@ else
         }
         game:GetService("ReplicatedStorage"):WaitForChild("Networking"):WaitForChild("ClientListeners"):WaitForChild("NEWTutorialEvent"):FireServer(unpack(args))
     else
-        -- normal script is here
+        task.wait(2.5)
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/godcraft998/EMP/refs/heads/main/AnimeVanguards/Process/MainProcess.lua"))()
     end
 end
