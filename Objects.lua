@@ -10,3 +10,4 @@ local function printObject(instance)
         warn(instance)
     end
 end
+

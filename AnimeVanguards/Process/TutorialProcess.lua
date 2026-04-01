@@ -5,60 +5,65 @@ end
 local RS = game:GetService("ReplicatedStorage")
 local SP = game:GetService("StarterPlayer")
 
-local TutorialHandler
+local PlaceId = {
+    Lobby = 16146832113,
+    Game = 16277809958
+}
 
-local GamePlaceId = 16277809958
-if game.PlaceId == GamePlaceId then
-    TutorialHandler = require(SP.Modules.Gameplay.Tutorial.ClientTutorialHandler)
-else
-    TutorialHandler = require(SP.Modules.Gameplay.ClientTutorialHandler)
+local function RandomWait(min, max)
+    task.wait(Random.new():NextNumber(2.5, 5))
 end
 
-local ConfigAPI = loadstring(game:HttpGet("https://raw.githubusercontent.com/godcraft998/EMP/refs/heads/main/ConfigAPI.lua"))()
+task.spawn(function()
+    task.wait(5)
 
-local GamePlaceId = 16277809958
+    if game.PlaceId == PlaceId.Lobby then 
 
-if game.PlaceId == GamePlaceId and TutorialHandler.IsInTutorial then
-    local ConfigFile = ConfigAPI:CreateConfig("EmP Hub/Anime Vanguards/Tutorial" .. game.Players.LocalPlayer.Name .. ".json");
-    local Loaded = ConfigFile:LoadConfig()
+        local DailyRewardsUI = game.Players.LocalPlayer.PlayerGui:FindFirstChild('DailyRewards')
+        if DailyRewardsUI then
+            local Handler = require(SP.Modules.Gameplay.DailyRewards.DailyRewardsHandler)
+            RandomWait(0.5, 1.5)
+            Handler:CloseInterface()
+        end
+        
+        local NewPlayersUI = game.Players.LocalPlayer.PlayerGui:FindFirstChild('NewPlayers')
+        if NewPlayersUI then
+            local Handler = require(SP.Modules.Gameplay.DailyRewards.NewPlayer.NewPlayerHandler)
+            RandomWait(0.5, 1.5)
+            Handler:CloseInterface()
+        end
 
-    if not Loaded then
-        Loaded = {
-            InTutorial = true,
-        }
-    end
+        local UpdateLogUI = game.Players.LocalPlayer.PlayerGui:FindFirstChild('UpdateLogFullScreen')
+        if UpdateLogUI then
+            local Handler = require(SP.Modules.Miscellaneous.UpdateLogHandler)
+            RandomWait(0.5, 1.5)
+            Handler:CloseInterface()
+        end
 
-    ConfigFile:SaveConfig(Loaded)
+        RandomWait(0.5, 1.5)
 
-    wait(0.5)
+        local TutorialHandler = require(SP.Modules.Gameplay.ClientTutorialHandler)
+        if TutorialHandler.IsInTutorial then
+            RandomWait(2.5, 5)
 
-    print('this is tutorial 1')
-
-    local args = {
-        "PartOne",
-        "Skip"
-    }
-    game:GetService("ReplicatedStorage"):WaitForChild("Networking"):WaitForChild("ClientListeners"):WaitForChild("NEWTutorialEvent"):FireServer(unpack(args))
-else
-    local ConfigFile = ConfigAPI:CreateConfig("EmP Hub/Anime Vanguards/Tutorial" .. game.Players.LocalPlayer.Name .. ".json"); 
-    local Loaded = ConfigFile:LoadConfig()
-
-    if Loaded and Loaded.InTutorial then
-        Loaded.InTutorial = false
-
-        ConfigFile:SaveConfig(Loaded)
-
-        wait(0.5)
-
-        print('this is tutorial 2')
+            
+            local args = {
+                "PartTwo",
+                "Skip"
+            }
+            game:GetService("ReplicatedStorage"):WaitForChild("Networking"):WaitForChild("ClientListeners"):WaitForChild("NEWTutorialEvent"):FireServer(unpack(args))
+        else 
+            warn('normal lobby')
+        end
+    elseif game.PlaceId == PlaceId.Game and TutorialHandler.IsInTutorial then
+        RandomWait(2.5, 5)
 
         local args = {
-            "PartTwo",
+            "PartOne",
             "Skip"
         }
         game:GetService("ReplicatedStorage"):WaitForChild("Networking"):WaitForChild("ClientListeners"):WaitForChild("NEWTutorialEvent"):FireServer(unpack(args))
-    else
-        task.wait(2.5)
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/godcraft998/EMP/refs/heads/main/AnimeVanguards/Process/MainProcess.lua"))()
+    else 
+        warn('normal in game')
     end
-end
+end)

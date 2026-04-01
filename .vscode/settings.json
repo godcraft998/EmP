@@ -1,6 +1,11 @@
 {
     "luau-lsp.plugin.enabled": true,
     "Lua.diagnostics.globals": [
-        "createWebhook"
+        "createWebhook",
+        "readfile"
+    ],
+    "Lua.diagnostics.disable": [
+        "undefined-global",
+        "unused-function"
     ]
 }

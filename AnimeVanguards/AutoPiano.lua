@@ -108,51 +108,18 @@ local function StartJamSession()
         end
     end
 
-    -- OPEN EVENTS UI
-    local HUD = WaitFor(function() return Gui:FindFirstChild("HUD") end)
-    Fire(HUD.RightButtons.Events.Button)
-    task.wait(1)
-
-    local Holder = WaitFor(function() return Gui.Events.Holder end)
-    local OptionsHolder = Holder.EventOptions.OptionsHolder
-    local Filters = OptionsHolder.EventsFilters
-    local Events = OptionsHolder.Events
-
-    -- FIND EVENT BUTTON
-    local function FindEvent()
-        for _,v in pairs(Events:GetChildren()) do
-            if v:IsA("Frame") and v:FindFirstChild(v.Name) then
-                local f = v[v.Name]
-                if f.EventTitle.Text == EVENT_NAME then
-                    return f.Button
-                end
-            end
-        end
-    end
-
-    local PianoButton = FindEvent()
-    if not PianoButton then
-        Fire(Filters.Regular.Button)
-        task.wait(0.5)
-        PianoButton = FindEvent()
-    end
-    if not PianoButton then return warn("Không tìm thấy event!") end
-
-    -- ENTER EVENT
-    Fire(PianoButton)
-    task.wait(1)
-
+    local SP = game:GetService("StarterPlayer")
+    local Handler = require(SP.Modules.Interface.Loader.Events.JamSessionHandler)
     
-    local EventInfo = Holder.EventInfoFrame
+    Handler:OpenGui()
 
-    -- CLICK PLAY
-    for _,v in pairs(EventInfo.Buttons:GetChildren()) do
-        if v:IsA("Frame") and v.Label.Text == "Play" then
-            Fire(v.Button)
-            break
-        end
-    end
-    task.wait(1)
+    wait(2.5)
+
+    -- JAM SESSION GUI
+    local JamSessionGui = WaitFor(function() return Gui:FindFirstChild("JamSessionGui") end, 5)
+    if not JamSessionGui then return warn("Không load được JamSessionGui") end
+
+    local Songs = JamSessionGui.Main.Songs
 
     -- JAM SESSION GUI
     local JamSessionGui = WaitFor(function() return Gui:FindFirstChild("JamSessionGui") end, 5)
