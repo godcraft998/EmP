@@ -10,7 +10,7 @@ end
 local function processLevel()
     random.wait(1, 2)
     functionEvent:WinterLTMEvent()
-    random.wait(2, 3)
+    random.wait(1, 1.5)
     functionEvent:StartMatch()
 end
 
