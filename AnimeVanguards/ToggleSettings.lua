@@ -35,15 +35,14 @@ local function ToggleSetting(setting, toggle)
     end
 end
 
-function
-    while not Handler.SettingsLoaded do
-        task.wait(1)
-    end
 
-    warn("EmP: Disable Settings")
+while not Handler.SettingsLoaded do
+    task.wait(1)
+end
 
-    for setting, toggle in pairs(ToggleConfig) do
-        ToggleSetting(setting, toggle)
-        wait(0.35)
-    end
-end)
+warn("EmP: Disable Settings")
+
+for setting, toggle in pairs(ToggleConfig) do
+    ToggleSetting(setting, toggle)
+    wait(0.35)
+end
