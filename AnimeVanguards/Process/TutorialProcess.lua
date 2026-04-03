@@ -22,16 +22,20 @@
         end
     end
 
+    local LoadingScreenHandler = require(SP.Modules.Interface.LoadingScreens.LoadingScreenHandler)
+    function features.IsLoaded()
+        return Handler.IsFinishedLoading
+    end
+
     task.spawn(function()
-        random.wait(12.5, 15.5)
+        while not features.IsLoaded() then
+            random.wait(1, 1.5)
+        end
         features.AntiAFK()
 
         if game.PlaceId == PlaceId.Lobby then 
 
             local DailyRewardsUI = game.Players.LocalPlayer.PlayerGui:FindFirstChild('DailyRewards')
-
-            print(DailyRewardsUI)
-
             if DailyRewardsUI then
                 local Handler = require(SP.Modules.Gameplay.DailyRewards.DailyRewardsHandler)
                 random.wait(0.5, 1.5)
@@ -53,13 +57,11 @@
                 random.wait(0.5, 1.5)
                 Handler:CloseInterface()
             end
-
             random.wait(0.5, 1.5)
 
             local TutorialHandler = require(SP.Modules.Gameplay.ClientTutorialHandler)
             if TutorialHandler.IsInTutorial then
                 random.wait(2.5, 5)
-
                 
                 local args = {
                     "PartTwo",
