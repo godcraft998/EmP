@@ -31,18 +31,6 @@ function features.IsLoaded()
     return LoadingScreenHandler.IsFinishedLoading
 end
 
-game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(state)
-    if state == Enum.TeleportState.InProgress then
-        -- chuẩn bị
-    elseif state == Enum.TeleportState.Completed then
-        -- re-execute script sau khi vào place mới
-        loadstring([[
-            -- code bạn muốn chạy lại
-            print("Script đã chạy lại sau teleport!")
-        ]])()
-    end
-end)
-
 task.spawn(function()
     while not features.IsLoaded() do
         print('wait screen loaded')
