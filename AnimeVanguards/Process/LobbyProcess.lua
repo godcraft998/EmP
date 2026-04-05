@@ -7,31 +7,27 @@ function random.wait(min, max)
     task.wait(math.random() * (max - min) + min)
 end
 
-local function processLevel()
+local processing = false
+
+local function WinterProcess()
     random.wait(1, 2)
     functionEvent:WinterLTMEvent()
-    random.wait(1, 1.5)
+    random.wait(0.75, 1)
     functionEvent:StartMatch()
 end
 
 local function ToggleSettings()
-    return loadstring(game:HttpGet("https://raw.githubusercontent.com/godcraft998/EMP/refs/heads/main/AnimeVanguards/FunctionEvents.lua"))();
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/godcraft998/EMP/refs/heads/main/AnimeVanguards/ToggleSettings.lua"))();
 end
 
 task.spawn(function()
     local playerLevel = player:GetAttribute("Level")
     local playerExperience = player:GetAttribute("Experience")
 
-    local toggle = ToggleSettings()
-    while not toggle do
-        task.wait(1)
-    end
-    print("toggled settings")
+    ToggleSettings()
 
-    random.wait(2.5, 5)
-
-    if playerLevel < 50 then
-        processLevel()
+    if not processing and playerLevel < 50 then
+        task.spawn(WinterProcess)
         return
     end
 end)

@@ -23,3 +23,4 @@ print(CurrencyHandler.GetCurrencyByName("HAPPYCoin"))
 
 local RaidsShopEvent = RS.Networking.Raids.RaidsShopEvent
 --RaidsShopEvent:FireServer("Purchase", { "Stage4", "Stat Chip", 400 })
+--GetAllRaidCurrencies()["Stage4"] == HAPPYCoin
