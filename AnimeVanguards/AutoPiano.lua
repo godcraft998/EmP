@@ -114,7 +114,7 @@ end
 
 local JamSessionHandler = require(StarterPlayer.Modules.Interface.Loader.Events.JamSessionHandler)
 local function StartAutoPiano()
-    local done, song, difficulty = iCheckScores()
+    local done, song, difficulty = CheckScores()
     if not done then
         difficulty = difficulty or "Easy"
         
