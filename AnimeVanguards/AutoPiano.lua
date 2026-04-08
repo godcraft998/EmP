@@ -112,7 +112,7 @@ local function CheckScores()
     return true
 end
 
-local JamSessionHandler = require(StarterPlayer.Modules.Interface.Loader.Events.JamSessionHandler)
+local JamSessionHandler = loadstring(game:HttpGet("https://raw.githubusercontent.com/godcraft998/EMP/refs/heads/main/AnimeVanguards/Minigame/JamSessionHandler.lua"))();
 local function StartAutoPiano()
     local done, song, difficulty = CheckScores()
     if not done then
