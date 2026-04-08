@@ -37,7 +37,7 @@ local BUTTON_COLORS = {
 }
 
 -- Pool cache cho note UI (tái sử dụng)
-local notePool = table.create(6, 1)
+local notePool = {}
 
 -- Mapping cho pattern detection (dùng khi check multi-press)
 local PATTERN_TABLE = {
