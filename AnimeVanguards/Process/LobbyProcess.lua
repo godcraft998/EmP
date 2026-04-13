@@ -4,8 +4,9 @@ local functionEvent = loadstring(game:HttpGet("https://raw.githubusercontent.com
 local GuitarSkip = loadstring(game:HttpGet("https://raw.githubusercontent.com/godcraft998/EMP/refs/heads/main/AnimeVanguards/Minigame/GuitarSkip.lua"))
 local OnwedUnits = loadstring(game:HttpGet("https://raw.githubusercontent.com/godcraft998/EMP/refs/heads/main/AnimeVanguards/OnwedUnits.lua"))
 
+local SP = game:GetService("StarterPlayer")
 
-local CurrencyHandler = require(StarterPlayer.Modules.Gameplay.CurrencyHandler)
+local CurrencyHandler = require(SP.Modules.Gameplay.CurrencyHandler)
 
 local random = {}
 function random.wait(min, max)
@@ -55,7 +56,7 @@ local function WinterSummon()
         loadNousigi("PianoConfig.json")
     end)
     
-    while processing then
+    while processing do
         processing = false
     end
 end
