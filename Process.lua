@@ -14,13 +14,28 @@ end
 local RS = game:GetService("ReplicatedStorage")
 local SP = game:GetService("StarterPlayer")
 
-local Handler = require(SP.Modules.Interface.Loader.Gameplay.Raids.RaidShopDataHandler)
+local SummonEvent = RS.Networking.Units.SummonEvent
+local UnitsEvent = RS.Networking.Units.UnitsEvent
 
-printObject(Handler.GetRaidShopData("Stage4").ShopData)
+local Event = UnitsEvent
 
-local CurrencyHandler = require(SP.Modules.Gameplay.CurrencyHandler)
-print(CurrencyHandler.GetCurrencyByName("HAPPYCoin"))
+local done = false
 
-local RaidsShopEvent = RS.Networking.Raids.RaidsShopEvent
---RaidsShopEvent:FireServer("Purchase", { "Stage4", "Stat Chip", 400 })
---GetAllRaidCurrencies()["Stage4"] == HAPPYCoin
+local conn
+conn = Event.OnClientEvent:Connect(function(...)
+    printObject(...)
+
+    done = true
+end)
+
+
+local start = tick()
+repeat
+    task.wait()
+until done or (tick() - start >= 2.5)
+
+if conn then
+    conn:Disconnect()
+
+    print("OnClientEvent: timeout")
+end
