@@ -1,7 +1,3 @@
-if not game:IsLoaded() then
-    game.Loaded:Wait()
-end
-
 local RS = game:GetService("ReplicatedStorage")
 local SP = game:GetService("StarterPlayer")
 

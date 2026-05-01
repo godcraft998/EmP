@@ -72,7 +72,7 @@ task.spawn(function()
         return
     end
 
-    if playerLevel < 50 then
+    if playerLevel < 47 then
         if not processing then
             task.spawn(WinterProcess)
             return
