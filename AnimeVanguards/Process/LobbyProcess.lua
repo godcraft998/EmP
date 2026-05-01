@@ -67,11 +67,6 @@ task.spawn(function()
 
     ToggleSettings()
 
-    if not processing and playerLevel < 50 then
-        task.spawn(WinterProcess)
-        return
-    end
-
     if playerLevel < 47 then
         if not processing then
             task.spawn(WinterProcess)
