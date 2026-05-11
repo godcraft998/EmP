@@ -15,8 +15,13 @@ local RS = game:GetService("ReplicatedStorage")
 local SP = game:GetService("StarterPlayer")
 local PG = game:GetService("Players").LocalPlayer.PlayerGui
 
-local Handler = SP.Modules.Gameplay.Units.ClientUnitHandler
+task.spawn(function()
+    local WallPlacement PG.HUD.SpringEventHUD.WallPlacementHUD
+    while true do
+        task.wait(1)
 
-printObject(Handler)
-
-game:GetService("Players").LocalPlayer:WaitForChild("Loader")
+        if WallPlacement and WallPlacement.Visible then
+            RS:WaitForChild("Networking"):WaitForChild("SpringEvent"):WaitForChild("ConfirmPlacement"):FireServer()
+        end
+    end
+end)

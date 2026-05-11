@@ -1,6 +1,6 @@
 local function printObject(instance)
     local count = 1;
-    warn("--- ᴘʀɪɴᴛ ᴏʙᴊᴇᴄᴛ ---")
+    print("--- ᴘʀɪɴᴛ ᴏʙᴊᴇᴄᴛ ---")
     if typeof(instance) == 'table' then
         for k, v in pairs(instance) do
             warn(count .. ":", k, "-", v)
@@ -15,8 +15,6 @@ local RS = game:GetService("ReplicatedStorage")
 local SP = game:GetService("StarterPlayer")
 local PG = game:GetService("Players").LocalPlayer.PlayerGui
 
-local Handler = SP.Modules.Gameplay.Units.ClientUnitHandler
+local Handler = require(SP.Modules.Gameplay.SpringEvent.SpringShopClient)
 
-printObject(Handler)
-
-game:GetService("Players").LocalPlayer:WaitForChild("Loader")
+printObject(Handler.Snapshot().Purchases)
