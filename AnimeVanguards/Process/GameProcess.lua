@@ -10,5 +10,4 @@ end
 
 getgenv().Config = loadConfig("WinterConfig.json");
 
-getgenv().Key = "kca5b6ee67b2bc3054d46849"
 loadstring(game:HttpGet("https://nousigi.com/loader.lua"))()
