@@ -25,6 +25,8 @@ function modules:FindUnitByRarity(Rarity)
     end
 end
 
+game:GetService("StarterPlayer"):WaitForChild("Modules"):WaitForChild("Miscellaneous"):WaitForChild("CustomPromptHandler")
+
 function modules:FindUnitByName(Name)
     for _,v in pairs(GetUnits()) do
         if (v.UnitData.Name == Name) then

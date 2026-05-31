@@ -13,6 +13,9 @@ local Mission = {
     },
     ['Crown of the Sun'] = {
         Easy = 5000, Medium = 15000, Hard = 30000, Expert = 60000
+    },
+    ['Rev It'] = {
+        Easy = 5000, Medium = 15000, Hard = 30000, Expert = 60000
     }
 }
 

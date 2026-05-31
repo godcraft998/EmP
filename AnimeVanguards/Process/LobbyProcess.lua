@@ -45,20 +45,6 @@ local function ToggleSettings()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/godcraft998/EMP/refs/heads/main/AnimeVanguards/ToggleSettings.lua"))();
 end
 
-local function WinterSummon()
-    processing = true
-
-    task.spawn(GuitarSkip)
-
-    task.spawn(function()
-        loadNousigi("PianoConfig.json")
-    end)
-    
-    while processing do
-        processing = false
-    end
-end
-
 task.spawn(function()
     local playerLevel = player:GetAttribute("Level")
     local playerExperience = player:GetAttribute("Experience")
@@ -67,12 +53,12 @@ task.spawn(function()
 
     if playerLevel < 47 then
         if not processing then
-            task.spawn(WinterProcess)
+            --task.spawn(WinterProcess)
             return
         end
     else
         if not processing and GetPresents26() > 150 then
-            task.spawn(WinterSummon)
+            --task.spawn(WinterSummon)
             return
         end
     end

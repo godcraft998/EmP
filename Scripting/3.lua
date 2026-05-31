@@ -15,6 +15,23 @@ local RS = game:GetService("ReplicatedStorage")
 local SP = game:GetService("StarterPlayer")
 local PG = game:GetService("Players").LocalPlayer.PlayerGui
 
-local Handler = require(SP.Modules.Gameplay.SpringEvent.SpringShopClient)
+local Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/godcraft998/EMP/refs/heads/main/AnimeVanguards/FunctionEvents.lua"))();
 
-printObject(Handler.Snapshot().Purchases)
+printObject(Functions:RequestStock("World Destroyer Shop"))
+
+local args = {
+	"AddMatch",
+	{
+		Difficulty = "Normal",
+		Act = "Act1",
+		StageType = "Story",
+		Stage = "Stage1",
+		FriendsOnly = false
+	}
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Networking"):WaitForChild("LobbyEvent"):FireServer(unpack(args))
+
+local args = {
+    "StartMatch"
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Networking"):WaitForChild("LobbyEvent"):FireServer(unpack(args))

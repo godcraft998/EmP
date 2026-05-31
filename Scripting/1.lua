@@ -92,7 +92,7 @@ old = hookmetamethod(game, "__namecall", function(self, ...)
                         obj.Type = "Upgrade"
                         obj.Unit = data.Data.Name
                         obj.Position = {data.Position.X, data.Position.Y, data.Position.Z}
-                    elseif state == "UpgradeMultiple"
+                    elseif state == "UpgradeMultiple" then
                         local data = ClientUnitHandler:GetUnitByGUID(args[2])
 
                         obj.Type = "UpgradeMultiple"
@@ -119,12 +119,11 @@ old = hookmetamethod(game, "__namecall", function(self, ...)
 
                     if REN:find("PlaceWall") then
                         obj.Type = "PlaceWall"
-                        InsertRecording(obj)
                         obj.Position = {args[1], args[2]}
+                        InsertRecording(obj)
                     elseif REN:find("RemoveWall") then
                         obj.Type = "RemoveWall"
                         InsertRecording(obj)
-                        obj.Position = {args[1], args[2]}
                     elseif REN:find("ConfirmPlacement") then
                         obj.Type = "ConfirmPlacement"
                         InsertRecording(obj)
@@ -152,7 +151,7 @@ task.spawn(function()
     macro.IsRecording = true
 
     while true do
-        if (time() - macro.StartTime) >= 75 then
+        if (time() - macro.StartTime) >= 30 then
             macro.IsRecording = false
 
             local MacroConfig = ConfigAPI:CreateConfig()

@@ -10,4 +10,4 @@ end
 
 getgenv().Config = loadConfig("WinterConfig.json");
 
-loadstring(game:HttpGet("https://nousigi.com/loader.lua"))()
+--loadstring(game:HttpGet("https://nousigi.com/loader.lua"))()
